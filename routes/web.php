@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 //code Dieume
-Route::resources(["client"=>ClientController::class,]);
+Route::resources([
+    "secteur"=>SecteurArticleController::class,
+    "adress"=>AdresseController::class,
+    "contact"=>ContactController::class,
+    "article"=>ArticleController::class,
+]);
 //Code christian
-Route::get('/boutique', [ClientController::class, 'boutique'])->name('client.boutique');
-Route::get('/produit', [ClientController::class, 'produit'])->name('client.produit');
-Route::get('/creer_boutique', [ClientController::class, 'creer_boutique'])->name('client.creer_boutique');
+// Route::get('/boutique', [ClientController::class, 'boutique'])->name('client.boutique');
+// Route::get('/produit', [ClientController::class, 'produit'])->name('client.produit');
+// Route::get('/creer_boutique', [ClientController::class, 'creer_boutique'])->name('client.creer_boutique');
 

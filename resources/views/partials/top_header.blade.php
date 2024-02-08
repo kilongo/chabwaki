@@ -8,7 +8,7 @@
         <ul class="header-links pull-right">
             <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
             <li><a href="#"><i class="fa fa-user-o"></i> Mon Compte</a></li>
-            <li><a href="{{route('client.creer_boutique')}}"><i class="fa fa-user-o"></i> Créer Boutique</a></li>
+            {{-- <li><a href="{{route('client.creer_boutique')}}"><i class="fa fa-user-o"></i> Créer Boutique</a></li> --}}
         </ul>
     </div>
 </div>

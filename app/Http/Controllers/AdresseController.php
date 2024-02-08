@@ -2,32 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Adresse;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class AdresseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("index");
+        //
     }
-
-    public function boutique()
-    {
-        return view("boutique");
-    }
-    public function produit()
-    {
-        return view("produit");
-    }
-    public function creer_boutique()
-    {
-        return view("creer_boutique");
-    }
-   
 
     /**
      * Show the form for creating a new resource.
@@ -48,7 +34,7 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show(Adresse $adresse)
     {
         //
     }
@@ -56,7 +42,7 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit(Adresse $adresse)
     {
         //
     }
@@ -64,7 +50,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, Adresse $adresse)
     {
         //
     }
@@ -72,7 +58,7 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
+    public function destroy(Adresse $adresse)
     {
         //
     }
