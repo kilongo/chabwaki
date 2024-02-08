@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//code Dieume
+Route::resources(["client"=>ClientController::class,]);
+//Code christian
+Route::get('/boutique', [ClientController::class, 'boutique'])->name('client.boutique');
+Route::get('/produit', [ClientController::class, 'produit'])->name('client.produit');
+Route::get('/creer_boutique', [ClientController::class, 'creer_boutique'])->name('client.creer_boutique');
 
-Route::resources([
-
-"client"=>ClientController::class,
-]);

@@ -15,6 +15,20 @@ class ClientController extends Controller
         return view("index");
     }
 
+    public function boutique()
+    {
+        return view("boutique");
+    }
+    public function produit()
+    {
+        return view("produit");
+    }
+    public function creer_boutique()
+    {
+        return view("creer_boutique");
+    }
+   
+
     /**
      * Show the form for creating a new resource.
      */
