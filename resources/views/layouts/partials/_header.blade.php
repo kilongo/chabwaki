@@ -9,7 +9,14 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                @if (Auth::guest())
+                    <li><a href="{{ route('UserRedirect') }}"><i class="fa fa-user-o"></i>Se connecter</a></li>     
+                @endif
+                @auth
+                    <li><a href="{{-- route('logout') --}}"><i class="fa fa-sign-out"></i>{{auth()->user()->nom_proprietaire}}</a></li>
+                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i>Se deconnecter</a></li>
+                @endauth
+                
             </ul>
         </div>
     </div>
@@ -23,11 +30,16 @@
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-md-3">
-                    <div class="header-logo">
+                    <!--div class="header-logo">
                         <a href="#" class="logo">
                             <img src="./img/logo.png" alt="">
                         </a>
+                        <span href="#" class="logo" style="color: white; text-decoration: none;">CHABWAKI</span>
+                    </div-->
+                    <div class="header-logo" style="text-align: center;">
+                        <a href="#" class="logo" style="color: white; text-decoration: none; font-size: 24px; display: block;margin-top:10px">CHABWAKI@</a>
                     </div>
+                    
                 </div>
                 <!-- /LOGO -->
 
@@ -36,12 +48,12 @@
                     <div class="header-search">
                         <form>
                             <select class="input-select">
-                                <option value="0">All Categories</option>
+                                <option value="0">Catégorie</option>
                                 <option value="1">Category 01</option>
                                 <option value="1">Category 02</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input class="input" placeholder="Chercher  ici">
+                            <button class="search-btn">Rechercher</button>
                         </form>
                     </div>
                 </div>
@@ -51,20 +63,67 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
+                        @if (Auth::guest())
                         <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
+                            <a href="{{route("NouveauProduit")}}">
+                            <!--a href="{{--route('form.render') --}}" wire:navigate-->
+                                <i class="fa fa-user-plus"></i>
+                                
+                                <span>Créer compte</span>
                                 <div class="qty">2</div>
                             </a>
                         </div>
+                        @endif
+                        @auth
+                        @php
+                                // Récupérer l'utilisateur connecté
+                                $user = auth()->user();
+
+                                // Récupérer l'id de la boutique associée à l'utilisateur
+                                $idBoutique = $user->id_boutique;
+                               
+                                // Vérifier si l'utilisateur a une boutique associée
+                                if ($idBoutique) {
+                                    // Si oui, obtenir le nom de la boutique
+                                    $boutique = App\Models\Boutique::find($idBoutique);
+
+                                    // Vérifier si la boutique existe
+                                    if ($boutique) {
+                                        $nomBoutique = $boutique->nom_boutique;
+                                        $nomBoutique = preg_replace('/\s+/', ' ', substr($nomBoutique, 0, 16));; // Assurez-vous que "nom" est le nom de la colonne contenant le nom de la boutique dans la table "boutique"
+                                    } else {
+                                        // Gérer le cas où la boutique n'existe pas
+                                        $nomBoutique = "Boutique introuvable";
+                                    }
+                                } else {
+                                    // Gérer le cas où l'utilisateur n'a pas de boutique associée
+                                    $nomBoutique = "Aucune boutique";
+                                }
+                            @endphp
+                        <div>
+                            <a href="{{route("NouveauProduit")}}">
+                            <!--a href="{{--route('form.render') --}}" wire:navigate-->
+                                <i class="fa fa-user"></i>
+                                <span>Mon compte</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{{route("NouveauProduit")}}">
+                            
+                                <i class="fa fa-user"></i>
+                                <span >{{$nomBoutique}}</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>
+                        @endauth                        
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
-                        <div class="dropdown">
+                        {{-- <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
+                                <span>Mon panier</span>
                                 <div class="qty">3</div>
                             </a>
                             <div class="cart-dropdown">
@@ -101,7 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /Cart -->
+                        <!-- /Cart --> --}}
 
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
@@ -128,13 +187,18 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li class="active"><a href="{{url('/')}}">Accueil</a></li>
+                <li><a href="{{route("Nos-produits.index")}}">Nos produits</a></li>
+    
+                <li><a href="{{route("CreerBoutique")}}">Créer Boutique</a></li>
+                @auth
+                <li><a href="{{route("MesProduits")}}">Ma boutique</a></li>
+                <li><a href="#">Mon compte</a></li>
+                <li><a href="{{route("NouveauProduit")}}">Ajout produit</a></li>
+                @endauth
+                <li><a href="{{route("UserRedirect")}}">Connexion</a></li>
+                {{-- <li><a href="{{route("ViewProduct")}}">À propos de nous</a></li> --}}
+                <!--li><a href="#">Accessories</a></li-->
             </ul>
             <!-- /NAV -->
         </div>

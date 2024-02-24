@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-	@include('partials.header')
-	<body>
-		<!-- HEADER -->
-		<header>
-			<!-- TOP HEADER -->
-			@include('partials.top_header')
-			<!-- /TOP HEADER -->
-
-			<!-- MAIN HEADER -->
-            @include('partials.main_header')
-        <!-- /MAIN HEADER -->
-
+@extends('layouts.global-layouts')
+@section('content')
 		<!-- NAVIGATION -->
-		@include('partials.menu_navigation')
+		
 		<!-- /NAVIGATION -->
+
+		<!-- SECTION -->
 
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
@@ -47,10 +37,12 @@
 						<!-- Billing Details -->
 						<div class="billing-details">
 							<div class="section-title">
-								<h3 class="titler">Les informations</h3>
+								<h3 class="titler">Les informations de la Boutique</h3>
 							</div>
+							<form method="POST" action="{{route('enregistrer-boutique')}}">
+							@csrf
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="Nom de la boutique">
+								<input class="input" type="text" name="nom_boutique" placeholder="Nom de la boutique">
 							</div>
 							<div class="form-group">
 								<select class="input" name="categorie_boutique">
@@ -68,7 +60,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<select class="input" name="province_rdc">
+								<select class="input" name="province">
 									<option value="" disabled selected hidden>Sélectionnez votre province</option>
 									<option value="Kinshasa">Kinshasa</option>
 									<option value="Nord-Kivu">Nord-Kivu</option>
@@ -101,105 +93,45 @@
 							</div>
 							
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="Ville/Territoire">
+								<input class="input" type="text" name="ville" placeholder="Ville/Territoire">
 							</div>						
 							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="Telephone">
+								<input class="input" type="tel" name="telephone" placeholder="Telephone">
 							</div>
 							<div class="form-group">
 								<input class="input" type="email" name="email" placeholder="Email">
 							</div>
 							<div class="form-group">
-								<textarea class="input" name="email" placeholder="Adresse de la boutique"></textarea>
+								<textarea class="input" name="adresse" placeholder="Adresse de la boutique"></textarea>
 							</div>	
 							<div class="section-title">
-								<h3 class="titler">Les informations du propietaire</h3>
+								<h3 class="titler">Les informations du propriétaire</h3>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Nom">
+								<input class="input" type="text" name="nom_proprietaire" placeholder="Nom du propriétaire">
+								<!--input class="hidden" type="text" name="type" value="vendeur"-->
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Prenom">
+								<input class="input" type="text" name="prenom_proprietaire" placeholder="Prenom du propriétaire">
 							</div>
 							
 							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
+								<input class="input" type="text" name="password" placeholder="Mot de passe">
 							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="create-account">
-									<label for="create-account">
-										<span></span>
-										Create Account?
-									</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-										<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
-								</div>
-							</div>
+							<!--div class="form-group">
+								<input class="input" type="confirm-password" name="confirm-password" placeholder="Confirmez le mot de passe">
+							</div-->
+							
+							<button  class="primary-btn order-submit">Creer la boutique</button>
+							
 						</div>
+					</form>
 						<!-- /Billing Details -->
 
-						<!-- Shiping Details -->
-						<div class="shiping-details">
-							<div class="section-title">
-								<h3 class="title">Shiping address</h3>
-							</div>
-							<div class="input-checkbox">
-								<input type="checkbox" id="shiping-address">
-								<label for="shiping-address">
-									<span></span>
-									Ship to a diffrent address?
-								</label>
-								<div class="caption">
-									<div class="form-group">
-										<input class="input" type="text" name="first-name" placeholder="First Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="last-name" placeholder="Last Name">
-									</div>
-									<div class="form-group">
-										<input class="input" type="email" name="email" placeholder="Email">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="address" placeholder="Address">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="city" placeholder="City">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="country" placeholder="Country">
-									</div>
-									<div class="form-group">
-										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-									</div>
-									<div class="form-group">
-										<input class="input" type="tel" name="tel" placeholder="Telephone">
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /Shiping Details -->
-
-						<!-- Order notes -->
-						<div class="order-notes">
-							<textarea class="input" placeholder="Order Notes"></textarea>
-						</div>
-						<!-- /Order notes -->
 					</div>
 
 					<!-- Order Details -->
-					<div class="col-md-5 order-details">
+					<!--div class="col-md-5 order-details">
 						<div class="section-title text-center">
 							<h3 class="title">Your Order</h3>
 						</div>
@@ -277,15 +209,10 @@
 		<!-- /SECTION -->
 
 		<!-- NEWSLETTER -->
-		@include('partials.newsletter')
+		@include('layouts.partials.newsletter')
 		<!-- /NEWSLETTER -->
 
 		<!-- FOOTER -->
-		@include('partials.footer')
-		<!-- /FOOTER -->
-
-        @include('partials.script_jquery')
-        <!-- jQuery Plugins -->
-
-	</body>
-</html>
+		
+		
+@endsection

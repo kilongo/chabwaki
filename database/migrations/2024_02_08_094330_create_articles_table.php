@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('description');
+            $table->string('id_boutique');
+            $table->string('prix');
+            $table->string('quantite');
+            $table->string('url_image_1')->nullable(); // Suppression de ->change()
+            $table->string('url_image_2')->nullable(); // Suppression de ->change()
+            $table->string('url_image_3')->nullable(); // Suppression de ->change()
+            $table->string('url_image_4')->nullable(); 
+            $table->string('id_secteur');
+            $table->string('marque');
+            $table->string('couleur');
+            $table->string('taille');
+            $table->string('poids');
             $table->timestamps();
         });
     }

@@ -59,7 +59,7 @@
 		<!-- /SECTION -->
 
 		<!-- SECTION -->
-		 <livewire:article>
+		 <livewire:produit-accueil>
 		<!-- /SECTION -->
 
 		<!-- HOT DEAL SECTION -->
@@ -98,7 +98,7 @@
 							</ul>
 							<h2 class="text-uppercase">hot deal this week</h2>
 							<p>New Collection Up to 50% OFF</p>
-							<a class="primary-btn cta-btn" href="{{route("article.index")}}">Shop now</a>
+							<a class="primary-btn cta-btn" href="{{route("article.index")}}">Nos produits</a>
 						</div>
 					</div>
 				</div>
@@ -405,8 +405,5 @@
 
 		<!-- FOOTER -->
 		
-		
-
-
-
+	
 @endsection
